@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfTRrainerOperationClaimDal:EfEntityRepositoryBase<TrainerOperationClaim, CoEduContext>, ITrainerOperationClaimDal
+    public class EfTrainerOperationClaimDal:EfEntityRepositoryBase<TrainerOperationClaim, CoEduContext>, ITrainerOperationClaimDal
     {
     }
 }

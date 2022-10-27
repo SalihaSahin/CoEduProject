@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,10 +17,12 @@ namespace WebAPI.Controllers
     public class TrainersController : ControllerBase
     {
         ITrainerService _trainerService;
+        IAuthService _authService;
 
-        public TrainersController(ITrainerService trainerService)
+        public TrainersController(ITrainerService trainerService, IAuthService authService)
         {
            _trainerService = trainerService;
+            _authService = authService;
         }
 
         [HttpGet("getall")]
@@ -124,6 +127,9 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+
+
         [HttpDelete("delete")]
         public IActionResult Delete(Trainer trainer)
         {
@@ -144,5 +150,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+       
     }
 }

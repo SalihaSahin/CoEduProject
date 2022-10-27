@@ -16,8 +16,8 @@ namespace Business.Abstract
         IResult UserExists(string email);
         IDataResult<AccessToken> CreateAccessToken(User user);
 
-        IDataResult<Trainer> Register(TrainerForRegisterDto trainerForRegisterDto, string password);
-        IDataResult<Trainer> Login(TrainerForLoginDto trainerForLoginDto);
+        IDataResult<Trainer> RegisterTrainer(TrainerForRegisterDto trainerForRegisterDto, string password);
+        IDataResult<Trainer> LoginTrainer(TrainerForLoginDto trainerForLoginDto);
         IResult TrainerExists(string email);
         IDataResult<AccessToken> CreateAccessToken(Trainer trainer);
     }

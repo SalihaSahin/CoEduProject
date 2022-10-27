@@ -41,6 +41,15 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfAddressDal>().As<IAddressDal>().SingleInstance();
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
+            builder.RegisterType<UserImageManager>().As<IUserImageService>().SingleInstance();
+            builder.RegisterType<EfUserImageDal>().As<IUserImageDal>().SingleInstance();
+
+            builder.RegisterType<TrainerOperationClaimManager>().As<ITrainerOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfTrainerOperationClaimDal>().As<ITrainerOperationClaimDal>().SingleInstance();
+
+            builder.RegisterType<EfUserOperaitonClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimsService>().SingleInstance();
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

@@ -57,9 +57,13 @@ namespace Business.Constants
         public static string UserAlreadyExists="Kullanıcı mevcut";
         public static string AccessTokenCreated="Token oluşturuldu";
         public static string succeed = "Başarılı";
-        internal static string TrainerRegistered;
+        public static string TrainerRegistered;
 
-        public static string  TrainerNotFound { get; internal set; }
-        public static string TrainerAlreadyExists { get; internal set; }
+        public static string  TrainerNotFound = "Kullanıcı bulunamadı";
+        public static string TrainerAlreadyExists = "Kullanıcı mevcut";
+        internal static string UserImageAdded;
+        internal static string UserImageDeleted;
+        internal static string UserImageListed;
+        internal static string UserImageUpdated;
     }
 }

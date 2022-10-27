@@ -36,7 +36,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.TrainerImageAdded);
         }
 
-        public IResult Delete(TrainerImage trainerImage)
+        public IResult Delete(IFormFile file,TrainerImage trainerImage)
         {
             _fileHelper.Delete(PathConstants.ImagesPath + trainerImage.ImagePath);
             _trainerImageDal.Delete(trainerImage);

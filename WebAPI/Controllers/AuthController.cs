@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("trainer/register")]
-        public ActionResult Register(TrainerForRegisterDto trainerForRegisterDto)
+        public ActionResult RegisterTrainer(TrainerForRegisterDto trainerForRegisterDto)
         {
             var trainerExists = _authService.TrainerExists(trainerForRegisterDto.TrainerEmail);
             if (!trainerExists.Success)
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
                 return BadRequest(trainerExists.Message);
             }
 
-            var registerResult = _authService.Register(trainerForRegisterDto, trainerForRegisterDto.TrainerPassword);
+            var registerResult = _authService.RegisterTrainer(trainerForRegisterDto, trainerForRegisterDto.TrainerPassword);
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
@@ -78,9 +78,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("trainer/login")]
-        public ActionResult Login(TrainerForLoginDto trainerForLoginDto)
+        public ActionResult LoginTrainer(TrainerForLoginDto trainerForLoginDto)
         {
-            var trainerToLogin = _authService.Login(trainerForLoginDto);
+            var trainerToLogin = _authService.LoginTrainer(trainerForLoginDto);
             if (!trainerToLogin.Success)
             {
                 return BadRequest(trainerToLogin.Message);

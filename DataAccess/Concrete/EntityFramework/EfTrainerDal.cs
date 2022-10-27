@@ -49,7 +49,7 @@ namespace DataAccess.Concrete.EntityFramework
                     TrainerSurname = t.TrainerSurname,
                     TrainerBranch = t.TrainerBranch,
                     AddressName = a.AddressName,
-
+                   
                     TrainerPhone = t.TrainerPhone,
                     TrainerEmail = t.TrainerEmail,
                     TrainerDate = t.TrainerDate,
@@ -65,5 +65,40 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+
+        public TrainerDetailDto GetTrainerDetailsByEmail(string email)
+        {
+            using (var context = new CoEduContext())
+            {
+                var result = from trainer in context.Trainers.Where(u => u.TrainerEmail == email)
+                             join a in context.Addresses
+                              on trainer.AddressId equals a.Id
+                             join f in context.FormOfEdus
+                             on trainer.FormOfEduId equals f.Id
+                             join e in context.Educations
+                             on trainer.EducationId equals e.Id
+                             select new TrainerDetailDto
+                             {
+                                TrainerId = trainer.TrainerId,
+                                 TrainerName = trainer.TrainerName,
+                                 TrainerSurname = trainer.TrainerSurname,
+                                 TrainerEmail = trainer.TrainerEmail,
+                                 TrainerBranch = trainer.TrainerBranch,
+                                 TrainerWage=trainer.TrainerWage,
+                                 FormOfEduName = f.FormOfEduName,
+                                 EducationName = e.EduName,
+                                 TrainerPhone = trainer.TrainerPhone,
+                                 TrainerDate = trainer.TrainerDate,
+                                 TrainerGender = trainer.TrainerGender,
+                                 TrainerSchool = trainer.TrainerSchool,
+                                 TrainerAbout = trainer.TrainerAbout,
+                                 AboutLessInfo = trainer.AboutLessInfo,
+                                 AddressName = a.AddressName,
+                             };
+                return result.FirstOrDefault();
+            }
+        }
+
+      
     }
 }

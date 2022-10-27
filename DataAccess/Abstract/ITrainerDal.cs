@@ -13,6 +13,7 @@ namespace DataAccess.Abstract
     {
         List<OperationClaim> GetClaims(Trainer trainer);
         List<TrainerDetailDto> GetTrainerDetails(Expression<Func<Trainer, bool>> filter = null);
- 
+        TrainerDetailDto GetTrainerDetailsByEmail(string email);
+    
     }
 }

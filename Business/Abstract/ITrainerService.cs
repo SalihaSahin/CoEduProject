@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utitlities.Results;
+using Core.Utitlities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -14,6 +15,8 @@ namespace Business.Abstract
         IDataResult<int> Add(Trainer trainer);
         IResult Delete(Trainer trainer);
         IResult Update(Trainer trainer);
+       
+
         IDataResult<List<Trainer>> GetAll();
         IDataResult<Trainer> GetById(int trainerId);
         IDataResult<TrainerDetailDto> GetTrainerDetailById(int trainerId);
@@ -23,5 +26,8 @@ namespace Business.Abstract
         IDataResult<List<TrainerDetailDto>> GetAllByEducationId(int educationId);
         IDataResult<List<TrainerDetailDto>> GetAllByFilter(int educationId, int formOfEduId, int addressId);
         Trainer GetByMail(string trainerEmail);
+
+        IDataResult<List<OperationClaim>> GetClaimsByTrainerId(int trainerId);
+        IDataResult<TrainerDetailDto> GetTrainerDetailsByEmail(string email);
     }
 }

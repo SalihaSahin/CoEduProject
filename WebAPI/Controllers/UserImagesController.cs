@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainerImagesController : ControllerBase
+    public class UserImagesController: ControllerBase
     {
-        ITrainerImageService _trainerImageService;
+        IUserImageService _userImageService;
 
-        public TrainerImagesController(ITrainerImageService trainerImageService)
+        public UserImagesController(IUserImageService userImageService)
         {
-            _trainerImageService = trainerImageService;
+            _userImageService = userImageService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _trainerImageService.GetAll();
+            var result = _userImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _trainerImageService.GetById(id);
+            var result = _userImageService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,47 +42,50 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getimagesbytrainerid")]
-        public IActionResult GetImagesByTrainerId(int trainerId)
+        [HttpGet("getimagesbyuserid")]
+        public IActionResult GetImagesByUSerId(int userId)
         {
-            var result = _trainerImageService.GetImagesByTrainerId(trainerId);
+            var result = _userImageService.GetImagesByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] TrainerImage trainerImage)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] UserImage userImage)
         {
-            var result = _trainerImageService.Add(file,trainerImage);
+            var result = _userImageService.Add(file, userImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpDelete("delete")]
-        public IActionResult Delete([FromForm] IFormFile file, [FromForm] TrainerImage trainerImage)
+        public IActionResult Delete([FromForm] IFormFile file, [FromForm] UserImage userImage)
         {
-            var result = _trainerImageService.Delete(file,trainerImage);
+            var result = _userImageService.Delete(file,userImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpPut("update")]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] TrainerImage trainerImage)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] UserImage userImage)
         {
-            var result = _trainerImageService.Update(file, trainerImage);
+            var result = _userImageService.Update(file, userImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+
     }
 }

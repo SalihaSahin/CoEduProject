@@ -80,7 +80,7 @@ namespace Business.Concrete
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
 
-        public IDataResult<Trainer> Register(TrainerForRegisterDto trainerForRegisterDto, string password)
+        public IDataResult<Trainer> RegisterTrainer(TrainerForRegisterDto trainerForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -98,7 +98,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Trainer>(trainer, Messages.TrainerRegistered);
         }
 
-        public IDataResult<Trainer> Login(TrainerForLoginDto trainerForLoginDto)
+        public IDataResult<Trainer> LoginTrainer(TrainerForLoginDto trainerForLoginDto)
         {
             var trainerToCheck = _trainerService.GetByMail(trainerForLoginDto.TrainerEmail);
             if (trainerToCheck == null)

@@ -2,10 +2,12 @@
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utitlities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,10 +24,10 @@ namespace Business.Concrete
         }
 
         //[ValidationAspect(typeof(UserValidator))]
-        public IResult Add(User user)
+        public IDataResult<int> Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserAdded);
+            return new SuccessDataResult<int>(user.UserId,Messages.UserAdded);
         }
 
         public List<OperationClaim> GetClaims(User user)
@@ -48,6 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
         }
 
+        [CacheAspect]
         public IDataResult<User> GetById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
@@ -57,6 +60,27 @@ namespace Business.Concrete
         {
             _userDal.Update(user);
             return new SuccessResult(Messages.UserUpdated);
+        }
+
+        public IResult UpdateUserDto(UserUpdateDto userUpdateDto , int userId)
+        {
+            var userForUpdate = GetById(userId).Data;
+            userForUpdate.UserName = userUpdateDto.UserName;
+            userForUpdate.UserSurName = userUpdateDto.UserSurName;
+            userForUpdate.UserEmail = userUpdateDto.UserEmail;
+            _userDal.Update(userForUpdate);
+            return new SuccessResult();
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaimsByUserId(int userId)
+        {
+            User user = _userDal.Get(u => u.UserId == userId);
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+
+        public IDataResult<UserDetailDto> GetUserDetailsByEmail(string email)
+        {
+            return new SuccessDataResult<UserDetailDto>(_userDal.GetUserDetailsByEmail(email));
         }
     }
 }

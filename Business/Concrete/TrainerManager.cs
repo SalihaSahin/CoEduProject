@@ -6,6 +6,8 @@ using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utitlities.Results;
+using Core.Utitlities.Security.Hashing;
+using Core.Utitlities.Security.JWT;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,10 +21,17 @@ namespace Business.Concrete
     public class TrainerManager:ITrainerService
     {
         ITrainerDal _trainerDal;
-         
-        public TrainerManager(ITrainerDal trainerDal)
+        IAuthService _authService;
+        IAddressService _addressService;
+        IFormOfEduService _formOfEduService;
+        IEducationService _educationService;
+        public TrainerManager(ITrainerDal trainerDal , IAuthService authService, IAddressService addressService, IFormOfEduService formOfEduService, IEducationService educationService)
         {
             _trainerDal = trainerDal;
+            _authService = authService;
+            _addressService = addressService;
+            _formOfEduService = formOfEduService;
+            _educationService = educationService;
         }
 
         //[SecuredOperation("admin,trainer")]
@@ -37,6 +46,7 @@ namespace Business.Concrete
         [SecuredOperation("admin,trainer")]
         public IResult Delete(Trainer trainer)
         {
+          
             _trainerDal.Delete(trainer);
             return new SuccessResult(Messages.TrainerDeleted);
         }
@@ -61,7 +71,6 @@ namespace Business.Concrete
             _trainerDal.Update(trainer);
             return new SuccessResult(Messages.TrainerUpdated);
         }
-
         public IDataResult<List<TrainerDetailDto>> GetTrainerDetails()
         {
           
@@ -101,6 +110,17 @@ namespace Business.Concrete
         public Trainer GetByMail(string trainerEmail)
         {
             return   _trainerDal.Get(t => t.TrainerEmail == trainerEmail);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaimsByTrainerId(int trainerId)
+        {
+            Trainer trainer = _trainerDal.Get(t => t.TrainerId == trainerId);
+            return new SuccessDataResult<List<OperationClaim>>(_trainerDal.GetClaims(trainer));
+        }
+
+        public IDataResult<TrainerDetailDto> GetTrainerDetailsByEmail(string email)
+        {
+            return new SuccessDataResult<TrainerDetailDto>(_trainerDal.GetTrainerDetailsByEmail(email));
         }
     }
 }

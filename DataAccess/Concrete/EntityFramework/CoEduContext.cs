@@ -15,6 +15,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserImage> UserImages { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<TrainerImage> TrainerImages { get; set; }
         public DbSet<SportEdu> SportEdus { get; set; }
