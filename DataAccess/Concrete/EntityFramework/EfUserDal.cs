@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Entities.DTOs;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -25,6 +26,23 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public List<UserDetailDto> GetUserDetails(Expression<Func<User, bool>> filter = null)
+        {
+            using (CoEduContext context = new CoEduContext())
+            {
+                var result = from u in filter == null ? context.Users : context.Users.Where(filter)
+                             select new UserDetailDto()
+                             {
+                                 UserId = u.UserId,
+                                 UserName=u.UserName,
+                                 UserSurname=u.UserSurname,
+                                 UserEmail=u.UserEmail
+
+                             };
+                return result.ToList();
+            }
+        }
+
         public UserDetailDto GetUserDetailsByEmail(string email)
         {
             using (var context = new CoEduContext())
@@ -34,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  UserId = user.UserId,
                                  UserName = user.UserName,
-                                 UserSurName = user.UserSurName,
+                                 UserSurname = user.UserSurname,
                                  UserEmail = user.UserEmail
                              };
                 return result.FirstOrDefault();

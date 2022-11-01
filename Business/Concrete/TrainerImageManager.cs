@@ -70,6 +70,11 @@ namespace Business.Concrete
         public IResult Update(IFormFile file, TrainerImage trainerImage)
         {
             var trainerForUpdate = _trainerImageDal.Get(image => image.TrainerId == trainerImage.TrainerId);
+            if(trainerForUpdate == null)
+            {
+                return this.Add(file, trainerImage);
+            }
+
             trainerForUpdate.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + trainerImage.ImagePath, PathConstants.ImagesPath);
             _trainerImageDal.Update(trainerForUpdate);
             return new SuccessResult(Messages.TrainerImageUpdated);

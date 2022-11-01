@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("gettrainerdetails")]
-        public IActionResult GetProductDetails(int categoryId)
+        public IActionResult GetTrainerDetails(int trainerId)
         {
             var result = _trainerService.GetTrainerDetails();
             if (result.Success)
@@ -118,7 +118,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Trainer trainer)
+        public IActionResult Add(TrainerCreateDto trainer)
         {
             var result = _trainerService.Add(trainer);
             if (result.Success)
@@ -140,6 +140,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPut("update")]
         public IActionResult Update(Trainer trainer)
         {
@@ -151,6 +152,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-       
+
+        [HttpPost("changetrainerpassword")]
+        public IActionResult ChangeTrainerPassword(ChangeUserPassword changeUserPassword)
+        {
+            var result = _trainerService.ChangeTrainerPassword(changeUserPassword);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+
     }
 }

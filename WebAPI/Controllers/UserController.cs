@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(User user)
+        public IActionResult Add(UserCreateDto user)
         {
             var result = _userService.Add(user);
             if (result.Success)
@@ -51,18 +51,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("updateuserdto")]
-        public IActionResult UpdateUserDto(UserUpdateDto userUpdateDto, int userId)
-        {
-            var result = _userService.UpdateUserDto(userUpdateDto, userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -85,5 +73,40 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getuserdetails")]
+        public IActionResult GetUserDetails(int userId)
+        {
+            var result = _userService.GetUserDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpGet("gettrainerdetailbyid")]
+        public IActionResult GetUserDetailById(int userId)
+        {
+            var result = _userService.GetUserDetailById(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("changeuserpassword")]
+        public IActionResult ChangeUserPassword(ChangeUserPassword changeUserPassword)
+        {
+            var result = _userService.ChangeUserPassword(changeUserPassword);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
     }
 }

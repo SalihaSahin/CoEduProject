@@ -99,6 +99,6 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-      
+       
     }
 }

@@ -64,6 +64,10 @@ namespace Business.Concrete
         public IResult Update(IFormFile file, UserImage userImage)
         {
             var userForUpdate = _userImageDal.Get(image => image.UserId == userImage.UserId);
+            if (userForUpdate == null)
+            {
+                return this.Add(file, userImage);
+            }
             userForUpdate.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + userImage.ImagePath, PathConstants.ImagesPath);
             _userImageDal.Update(userForUpdate);
             return new SuccessResult(Messages.UserImageUpdated);

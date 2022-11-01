@@ -65,5 +65,6 @@ namespace Business.Constants
         internal static string UserImageDeleted;
         internal static string UserImageListed;
         internal static string UserImageUpdated;
+        internal static string passwordChanged;
     }
 }

@@ -37,7 +37,7 @@ namespace Business.Concrete
             {
                 UserEmail = userForRegisterDto.UserEmail,
                 UserName = userForRegisterDto.UserName,
-                UserSurName = userForRegisterDto.UserSurName,
+                UserSurname = userForRegisterDto.UserSurName,
                 UserPasswordHash = passwordHash,
                 UserPasswordSalt = passwordSalt,
                 Status = true
