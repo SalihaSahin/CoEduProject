@@ -75,18 +75,17 @@ namespace Business.Concrete
             };
         }
 
-        [SecuredOperation("admin,trainer")]
-        public IResult Delete(Trainer trainer)
+       // [SecuredOperation("admin")]
+        public IResult Delete(int id)
         {
-          
-            _trainerDal.Delete(trainer);
+            var result = _trainerDal.Get(t => t.TrainerId == id);
+            _trainerDal.Delete(result);
             return new SuccessResult(Messages.TrainerDeleted);
         }
 
         [CacheAspect]
         public IDataResult<List<Trainer>> GetAll()
         {
-
             return new SuccessDataResult<List<Trainer>>(_trainerDal.GetAll(), Messages.TrainerListed);
         }
          
@@ -96,7 +95,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Trainer>(_trainerDal.Get(t => t.TrainerId == trainerId));
         }
 
-        [SecuredOperation("admin,trainer")]
+        //[SecuredOperation("admin,trainer")]
         [CacheRemoveAspect("ITrainerService.Get")]
         public IResult Update(Trainer trainer)
         {
@@ -160,19 +159,19 @@ namespace Business.Concrete
             return new SuccessDataResult<Trainer>(_trainerDal.Get(t => t.TrainerEmail == trainerEmail));
         }
 
-        public IResult ChangeTrainerPassword(ChangeUserPassword changeUserPassword)
+        public IResult ChangeTrainerPassword(ChangeTrainerPassword changeTrainerPassword)
         {
             byte[] passwordHash, passwordSalt;
-            var trainerToCheck = GetByTrainerMail(changeUserPassword.Email);
+            var trainerToCheck = GetByTrainerMail(changeTrainerPassword.TrainerEmail);
             if (trainerToCheck.Data == null)
             {
                 return new ErrorResult(Messages.UserNotFound);
             }
-            if (!HashingHelper.VerifyPasswordHash(changeUserPassword.OldPassWord, trainerToCheck.Data.TrainerPasswordHash, trainerToCheck.Data.TrainerPasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(changeTrainerPassword.OldPassWord, trainerToCheck.Data.TrainerPasswordHash, trainerToCheck.Data.TrainerPasswordSalt))
             {
                 return new ErrorResult(Messages.PasswordError);
             }
-            HashingHelper.CreatePasswordHash(changeUserPassword.NewPassword, out passwordHash, out passwordSalt);
+            HashingHelper.CreatePasswordHash(changeTrainerPassword.NewPassword, out passwordHash, out passwordSalt);
             trainerToCheck.Data.TrainerPasswordHash = passwordHash;
             trainerToCheck.Data.TrainerPasswordSalt = passwordSalt;
             _trainerDal.Update(trainerToCheck.Data);

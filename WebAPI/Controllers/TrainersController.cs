@@ -131,9 +131,9 @@ namespace WebAPI.Controllers
 
 
         [HttpDelete("delete")]
-        public IActionResult Delete(Trainer trainer)
+        public IActionResult Delete(int id)
         {
-            var result = _trainerService.Delete(trainer);
+            var result = _trainerService.Delete(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -154,9 +154,9 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("changetrainerpassword")]
-        public IActionResult ChangeTrainerPassword(ChangeUserPassword changeUserPassword)
+        public IActionResult ChangeTrainerPassword(ChangeTrainerPassword changeTrainerPassword)
         {
-            var result = _trainerService.ChangeTrainerPassword(changeUserPassword);
+            var result = _trainerService.ChangeTrainerPassword(changeTrainerPassword);
             if (result.Success)
             {
                 return Ok(result);

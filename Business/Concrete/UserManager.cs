@@ -49,9 +49,10 @@ namespace Business.Concrete
         {
             return _userDal.Get(u => u.UserEmail == email);
         }
-        public IResult Delete(User user)
+        public IResult Delete(int id)
         {
-            _userDal.Delete(user);
+            var result = _userDal.Get(u => u.UserId == id);
+            _userDal.Delete(result);
             return new SuccessResult(Messages.UserDeleted);
         }
 

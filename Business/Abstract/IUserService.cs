@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         IDataResult<int> Add(User user);
         IDataResult<int> Add(UserCreateDto userCreateDto);
-        IResult Delete(User user);
+        IResult Delete(int id);
         IResult Update(User user);
         //IResult UpdateUserDto(UserUpdateDto userUpdateDto);
         IDataResult<List<UserDetailDto>> GetUserDetails();

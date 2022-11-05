@@ -15,7 +15,7 @@ namespace Business.Abstract
         IDataResult<int> Add(TrainerCreateDto trainer);
         IDataResult<int> Add(Trainer trainer);
 
-        IResult Delete(Trainer trainer);
+        IResult Delete(int id);
         IResult Update(Trainer trainer);
        
 
@@ -31,7 +31,7 @@ namespace Business.Abstract
         IDataResult<Trainer> GetByTrainerMail(string trainerEmail);
         Trainer GetByMail(string trainerEmail);
 
-        IResult ChangeTrainerPassword(ChangeUserPassword changeUserPassword);
+        IResult ChangeTrainerPassword(ChangeTrainerPassword changeTrainerPassword);
 
         IDataResult<List<OperationClaim>> GetClaimsByTrainerId(int trainerId);
         IDataResult<TrainerDetailDto> GetTrainerDetailsByEmail(string email);
