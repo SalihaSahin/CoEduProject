@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete([FromForm] IFormFile file, [FromForm] TrainerImage trainerImage)
         {
             var result = _trainerImageService.Delete(file,trainerImage);

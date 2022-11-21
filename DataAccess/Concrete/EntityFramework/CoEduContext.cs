@@ -13,7 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CoEduDb;Trusted_Connection=true");
         }
-
+        
+       
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
@@ -28,5 +31,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<TrainerOperationClaim> TrainerOperationClaims { get; set; }
+    
     }
 }

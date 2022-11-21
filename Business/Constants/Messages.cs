@@ -58,13 +58,14 @@ namespace Business.Constants
         public static string AccessTokenCreated="Token oluşturuldu";
         public static string succeed = "Başarılı";
         public static string TrainerRegistered;
-
         public static string  TrainerNotFound = "Kullanıcı bulunamadı";
         public static string TrainerAlreadyExists = "Kullanıcı mevcut";
-        internal static string UserImageAdded;
-        internal static string UserImageDeleted;
-        internal static string UserImageListed;
-        internal static string UserImageUpdated;
-        internal static string passwordChanged;
+        public static string UserImageAdded = "Kullanıcı resmi eklendi";
+        public static string UserImageDeleted = "Kullanıcı resmi kaldırıldı";
+        public static string UserImageListed = "Kullanıcılar listelendi";
+        public static string UserImageUpdated = "Kullanıcı resmi güncellendi";
+        public static string passwordChanged = "password değiştirildi";
+        public static string CardSaved = "Kart kayıt edildi";
+        public static string CardDeleted = "Kart silindi";
     }
 }
