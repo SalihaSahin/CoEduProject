@@ -32,6 +32,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("update")]
+        public IActionResult Update(CreditCardUpdateDto creditCardUpdateDto)
+        {
+            var result = creditCardService.Update(creditCardUpdateDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getbycreditcardid")]
         public IActionResult GetByCreditCardId(int id)
         {
@@ -42,6 +53,18 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getbycreditcardnumber")]
+        public IActionResult GetByCreditCardNumber(string cardNumber)
+        {
+            var result = creditCardService.GetByCreditCardNumber(cardNumber);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getbyuserid")]
         public IActionResult GetByUserId(int id)
         {

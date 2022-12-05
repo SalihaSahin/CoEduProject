@@ -18,7 +18,7 @@ namespace Business.Concrete
             this.creditCardDal = creditCardDal;
         }
 
-        public IResult Add(CreditCardCreateDto creditCardCreateDto)
+        public IDataResult<int> Add(CreditCardCreateDto creditCardCreateDto)
         {
             var creditCardForCreate = new CreditCard()
             {
@@ -32,6 +32,23 @@ namespace Business.Concrete
             };
 
             creditCardDal.Add(creditCardForCreate);
+            return new SuccessDataResult<int>(creditCardForCreate.Id);
+        }
+
+        public IResult Update(CreditCardUpdateDto creditCardUpdateDto)
+        {
+            var creditCardForUpdate = creditCardDal
+                .Get(creditCard => creditCard.CardNumber == creditCardUpdateDto.CardNumber);
+
+            creditCardForUpdate.UserId = creditCardUpdateDto.UserId;
+            creditCardForUpdate.FirstName = creditCardUpdateDto.FirstName;
+            creditCardForUpdate.LastName = creditCardUpdateDto.LastName;
+            creditCardForUpdate.CardNumber = creditCardUpdateDto.CardNumber;
+            creditCardForUpdate.CVV = creditCardUpdateDto.CVV;
+            creditCardForUpdate.ExpiryDate = creditCardUpdateDto.ExpiryDate;
+
+            creditCardDal.Update(creditCardForUpdate);
+
             return new SuccessResult();
         }
 
@@ -40,9 +57,16 @@ namespace Business.Concrete
             return new SuccessDataResult<CreditCard>(creditCardDal.Get(c => c.Id == creditCardId));
         }
 
+        public IDataResult<CreditCard> GetByCreditCardNumber(string cardNumber)
+        {
+            return new SuccessDataResult<CreditCard>(creditCardDal.Get(c => c.CardNumber == cardNumber));
+        }
+
         public IDataResult<List<CreditCard>> GetByUserId(int userId)
         {
             return new SuccessDataResult<List<CreditCard>>(creditCardDal.GetAll(u => u.UserId == userId));
         }
+
+
     }
 }
