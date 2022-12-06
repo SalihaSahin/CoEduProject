@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utitlities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,6 +20,7 @@ namespace Business.Concrete
             this.creditCardDal = creditCardDal;
         }
 
+        [ValidationAspect(typeof(CreditCardValidator))]
         public IDataResult<int> Add(CreditCardCreateDto creditCardCreateDto)
         {
             var creditCardForCreate = new CreditCard()
@@ -35,6 +38,7 @@ namespace Business.Concrete
             return new SuccessDataResult<int>(creditCardForCreate.Id);
         }
 
+      
         public IResult Update(CreditCardUpdateDto creditCardUpdateDto)
         {
             var creditCardForUpdate = creditCardDal

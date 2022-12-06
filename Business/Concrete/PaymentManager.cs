@@ -41,15 +41,18 @@ namespace Business.Concrete
         public IDataResult<List<PaymentDto>> GetAllByUserId(int id)
         {
             var creditCards = creditCardService.GetByUserId(id);
-            var payments = creditCards.Data.SelectMany(c=>paymentDal.GetAll(p=>p.CreditCardId==c.Id).Select(d=>new PaymentDto() { 
-            
+            var payments = 
+                creditCards.Data.SelectMany(c=>paymentDal.GetAll(p=>p.CreditCardId==c.Id ).Select(d=>new PaymentDto() { 
+                 
                 CreditCardNumber=c.CardNumber,
                 PaymentDate= d.PaymentDate,
                 Total= d.Total,
-                TrainerFullName=c.FirstName +" "+ c.LastName
+                TrainerFullName=c.FirstName+" "+ c.LastName
             }));
 
             return new SuccessDataResult<List<PaymentDto>>(payments.ToList());
         }
+
+    
     }
 }

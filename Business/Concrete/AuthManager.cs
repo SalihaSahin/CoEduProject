@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utitlities.Results;
 using Core.Utitlities.Security.Hashing;
@@ -29,6 +31,7 @@ namespace Business.Concrete
             _trainerOperationClaimService = trainerOperationClaimService;
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -47,7 +50,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
-
+        [ValidationAspect(typeof(UserValidator))]
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.UserEmail);
@@ -79,7 +82,7 @@ namespace Business.Concrete
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
-
+        [ValidationAspect(typeof(TrainerValidator))]
         public IDataResult<Trainer> RegisterTrainer(TrainerForRegisterDto trainerForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -97,7 +100,7 @@ namespace Business.Concrete
             _trainerOperationClaimService.Add(new TrainerOperationClaim() { TrainerId = trainer.TrainerId, OperationClaimId = 3 });
             return new SuccessDataResult<Trainer>(trainer, Messages.TrainerRegistered);
         }
-
+        [ValidationAspect(typeof(TrainerValidator))]
         public IDataResult<Trainer> LoginTrainer(TrainerForLoginDto trainerForLoginDto)
         {
             var trainerToCheck = _trainerService.GetByMail(trainerForLoginDto.TrainerEmail);

@@ -11,18 +11,10 @@ namespace Business.ValidationRules.FluentValidation
     {
         public TrainerValidator()
         {
-            //RuleFor(t=> t.AboutLessInfo).NotEmpty();
-            //RuleFor(t => t.TrainerAbout).NotEmpty();
-            //RuleFor(t => t.TrainerBranch).NotEmpty();
-            //RuleFor(t => t.TrainerDate).NotEmpty();
-            //RuleFor(t => t.TrainerEmail).NotEmpty();
-            //RuleFor(t => t.TrainerGender).NotEmpty();
-            //RuleFor(t => t.TrainerName).NotEmpty();
-            //RuleFor(t => t.TrainerPhone).Length(11).WithMessage("Telefon numaranızı kontrol edin");
-            //RuleFor(t => t.TrainerSchool).NotEmpty();
-            //RuleFor(t => t.TrainerSurname).NotEmpty();
-            //RuleFor(t => t.TrainerWage).NotEmpty();
-            
+
+            RuleFor(u => u.TrainerName).NotEmpty().WithMessage("Kullanıcı ismini doldurun");
+            RuleFor(u => u.TrainerSurname).NotEmpty().WithMessage("Kullanıcı soyismini doldurun");
+            RuleFor(u => u.TrainerEmail).NotEmpty().WithMessage("Email boş bırakılamaz");
 
         }
     }
