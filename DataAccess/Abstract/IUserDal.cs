@@ -14,5 +14,7 @@ namespace DataAccess.Abstract
         UserDetailDto GetUserDetailsByEmail(string email);
         List<UserDetailDto> GetUserDetails(Expression<Func<User, bool>> filter = null);
 
+      
+
     }
 }

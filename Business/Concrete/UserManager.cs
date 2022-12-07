@@ -27,6 +27,7 @@ namespace Business.Concrete
         {
             _userDal = userDal;
             _userOperationClaimsService = userOperationClaimsService;
+           
         }
 
         //[ValidationAspect(typeof(UserValidator))]
@@ -141,5 +142,6 @@ namespace Business.Concrete
             return new SuccessResult(Messages.passwordChanged);
 
         }
+
     }
 }

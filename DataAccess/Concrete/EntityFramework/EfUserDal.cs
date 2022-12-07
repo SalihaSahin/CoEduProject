@@ -58,5 +58,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.FirstOrDefault();
             }
         }
+
+      
     }
 }

@@ -10,5 +10,6 @@ namespace Business.Abstract
     {
         IResult Add(PaymentCreateDto paymentCreateDto);
         IDataResult<List<PaymentDto>> GetAllByUserId(int id);
+        IDataResult<List<PaymentDto>> GetPaymentDetailsByUserId(int userId);
     }
 }

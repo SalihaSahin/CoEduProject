@@ -15,6 +15,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
         
        
+        public DbSet<UserFav> UserFavs { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<User> Users { get; set; }

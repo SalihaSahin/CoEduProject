@@ -8,10 +8,8 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IPaymentDal : IEntityRepository<Payment>
+    public interface IUserFavDal : IEntityRepository<UserFav>
     {
-        List<PaymentDto> GetPaymentDetailsByUserId(int userId);
-
-
+        List<UserFavDetailDto> GetUserDetails(Expression<Func<UserFav, bool>> filter = null);
     }
 }

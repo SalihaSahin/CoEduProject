@@ -40,5 +40,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getpaymentdetailsbyuserid")]
+        public IActionResult GetPaymentDetailsByUserId(int id)
+        {
+            var result = paymentService.GetPaymentDetailsByUserId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
