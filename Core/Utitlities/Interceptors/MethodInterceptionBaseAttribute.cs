@@ -14,6 +14,7 @@ namespace Core.Utilities.Interceptors
 
         }
     }
+    //Attribute olması sağlandı
 }
 
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utitlities.IoC
 {
-    //autofac deki injeksionları oluşturabilmemizi sağlar
+    //autofac webapi deki injeksionları oluşturabilmemizi sağlar
     public static class ServiceTool
     {
         public static IServiceProvider ServiceProvider { get; private set; }

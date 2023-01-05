@@ -12,7 +12,6 @@ namespace Entities.Concrete
         public int UserId { get; set; }
         public int EducationId { get; set; }
         public string TrainerBranch { get; set; }
-        public string TrainerEducationName { get; set; }
         public string TrainerFullName { get; set; }
     }
 }

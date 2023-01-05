@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Core.Utitlities.Security.JWT
 {
+    //Token oluşturularak jwt den bilgileri çekilmesine yarayacak interface
     public interface ITokenHelper
     {
         AccessToken CreateToken(User user, List<OperationClaim> operationClaims);

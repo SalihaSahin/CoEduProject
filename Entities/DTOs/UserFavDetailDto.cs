@@ -11,7 +11,7 @@ namespace Entities.DTOs
         public int TrainerId { get; set; }
         public int UserId { get; set; }
         public string TrainerBranch { get; set; }
-        public string TrainerEducationName { get; set; }
         public string TrainerFullName { get; set; }
+        public string EducationName { get; set; }
     }
 }

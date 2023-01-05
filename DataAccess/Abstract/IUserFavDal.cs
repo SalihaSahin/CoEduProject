@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IUserFavDal : IEntityRepository<UserFav>
     {
-        List<UserFavDetailDto> GetUserDetails(Expression<Func<UserFav, bool>> filter = null);
+        List<UserFavDetailDto> GetUserFavDetails(Expression<Func<UserFav, bool>> filter = null);
     }
 }

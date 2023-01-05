@@ -34,7 +34,7 @@ namespace Business.Concrete
         public IDataResult<int> Add(Trainer trainer)
         {
             _trainerDal.Add(trainer);
-            _trainerOperationClaimService.Add(new TrainerOperationClaim() { TrainerId = trainer.TrainerId, OperationClaimId = 3 });
+            //_trainerOperationClaimService.Add(new TrainerOperationClaim() { TrainerId = trainer.TrainerId, OperationClaimId = 3 });
             return new SuccessDataResult<int>(trainer.TrainerId, Messages.TrainerAdded);
         }
 
@@ -75,7 +75,7 @@ namespace Business.Concrete
             };
         }
 
-       // [SecuredOperation("admin")]
+       [SecuredOperation("admin")]
         public IResult Delete(int id)
         {
             var result = _trainerDal.Get(t => t.TrainerId == id);

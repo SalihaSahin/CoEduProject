@@ -67,5 +67,7 @@ namespace Business.Constants
         public static string passwordChanged = "password değiştirildi";
         public static string CardSaved = "Kart kayıt edildi";
         public static string CardDeleted = "Kart silindi";
+
+        public static string UserFavDeleted = "Bu eğitmen favorilerden kaldırıldı.";
     }
 }

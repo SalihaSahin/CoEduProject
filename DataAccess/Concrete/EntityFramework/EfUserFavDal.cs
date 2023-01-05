@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserFavDal : EfEntityRepositoryBase<UserFav, CoEduContext>, IUserFavDal
     {
-        public List<UserFavDetailDto> GetUserDetails(Expression<Func<UserFav, bool>> filter = null)
+        public List<UserFavDetailDto> GetUserFavDetails(Expression<Func<UserFav, bool>> filter = null)
         {
             using (CoEduContext context = new CoEduContext())
             {
@@ -29,9 +29,10 @@ namespace DataAccess.Concrete.EntityFramework
                                  Id = u.Id,
                                  UserId = a.UserId,
                                  TrainerId = t.TrainerId,
-                                 TrainerFullName = t.TrainerName+" "+t.TrainerSurname,
-                                 TrainerBranch=t.TrainerBranch,
-                                 TrainerEducationName=e.EduName
+                                 TrainerFullName = t.TrainerName+" "+ t.TrainerSurname,
+                                 TrainerBranch= t.TrainerBranch,
+                                 EducationName= e.EduName
+                                 
 
                              };
                 return result.ToList();

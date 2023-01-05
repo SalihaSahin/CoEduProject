@@ -34,7 +34,7 @@ namespace Business.Concrete
         public IDataResult<int> Add(User user)
         {
             _userDal.Add(user);
-            _userOperationClaimsService.Add(new UserOperationClaim() { UserId = user.UserId, OperationClaimId = 2 });
+           // _userOperationClaimsService.Add(new UserOperationClaim() { UserId = user.UserId, OperationClaimId = 2 });
             return new SuccessDataResult<int>(user.UserId, Messages.UserAdded);
         }
 

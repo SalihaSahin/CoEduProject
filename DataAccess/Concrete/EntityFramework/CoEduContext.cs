@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CoEduDb;Trusted_Connection=true");
         }
         
-       
+        
         public DbSet<UserFav> UserFavs { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }

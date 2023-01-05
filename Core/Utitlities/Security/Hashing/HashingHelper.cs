@@ -11,8 +11,9 @@ namespace Core.Utitlities.Security.Hashing
             using (var hmac= new System.Security.Cryptography.HMACSHA512())
             {
                 passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));//byte almak için stringi
             }
+            //Verilen bir password değerine göre passwordsalt ve passwordhash oluşturuluyor
         }
         public static bool VerifyPasswordHash(string password,  byte[] passwordHash,  byte[] passwordSalt)
         {
